@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   check_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/18 13:10:47 by enunes            #+#    #+#             */
-/*   Updated: 2017/09/22 16:20:20 by enunes           ###   ########.fr       */
+/*   Created: 2017/09/22 14:38:55 by enunes            #+#    #+#             */
+/*   Updated: 2017/09/22 15:29:24 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
-
-# include <stdarg.h>
-# include <limits.h>
-
-typedef struct s_handler
+int		is_flag(char c)
 {
-	va_list			ap;
-	int				hash;
-	int				zero;
-	int				minus;
-	int				plus;
-	int				space;
-	int				prec;
-	int				width;
-	int				hh;
-	int				h;
-	int				l;
-	int				ll;
-	int				j;
-	int				z;	
-	char			conversion;
-	unsigned int	size;
-}					t_handler;
+	return (c == '+' || c == '-' || c == ' ' || c == '#' || c == '0');
+}
 
-int		ft_printf(const char *format, ...);
+int		is_num(char c)
+{
+	return (c > '0' && c <= '9');
+}
 
-#endif
+int		is_mod(char c)
+{
+	return (c == 'h' || c == 'l' || c == 'j' || c == 'z');
+}

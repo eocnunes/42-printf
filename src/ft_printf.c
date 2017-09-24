@@ -6,20 +6,20 @@
 /*   By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 12:59:43 by enunes            #+#    #+#             */
-/*   Updated: 2017/09/18 15:53:27 by enunes           ###   ########.fr       */
+/*   Updated: 2017/09/22 16:20:16 by enunes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libftprintf.h>
 
-int			readformat(char **format, va_list ap)
+int			readformat(char **format, t_handler h)
 {
-	t_flag		f;
 	while (*format || **format)
 	{
-		if (**format == '%')
+		h_reset(&h);
+		if (**format == '%' && (*(*format + 1)))
 		{
-
+			parse_handlers(format, h);
 		}
 		else
 		{
@@ -29,18 +29,19 @@ int			readformat(char **format, va_list ap)
 		if (*format)
 			*format++;
 	}
-	return (f.size);
+	return (h.size);
 }
 
 int			ft_printf(const char *format, ...)
 {
-	va_list		ap;
+	t_handler	h;
 	int			ret;
 
+	h->size = 0;
 	if (!format || !*format)
 		return (0);
-	va_start(ap, format);
-	ret = readformat((char **)&format, ap);
+	va_start(h->ap, format);
+	ret = readformat((char **)&format, h);
 	va_end(ap);
 	return(ret);
 }

@@ -6,7 +6,7 @@
 #    By: enunes <eocnunes@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/18 13:30:05 by enunes            #+#    #+#              #
-#    Updated: 2017/09/18 13:44:15 by enunes           ###   ########.fr        #
+#    Updated: 2017/09/22 14:33:10 by enunes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC_DIR = src/
 LFT_DIR = libft/
 
 SRCS = ft_printf.c \
+	   parse_handlers.c \
 
 LFT_SRCS = 
 
@@ -39,15 +40,12 @@ $(LOBJ): %.o: %.c
 
 $(NAME): $(POBJ) $(LOBJ)
 	@ar rcs $(NAME) $(POBJ) $(LOBJ)
-	@echo "\033[32mft_printf Created\033[0m"
 
 clean:
 	@rm -rf $(SRC_DIR)*.o
 	@rm -rf $(LFT_DIR)*.o $(LFT_DIR)libft.a
-	@echo "\033[31mft_printf Removed\033[0m"
 
 fclean: clean
 	@rm -rf $(NAME)
-	@echo "\033[31mft_printf Removed\033[0m"
 
 re: fclean all
